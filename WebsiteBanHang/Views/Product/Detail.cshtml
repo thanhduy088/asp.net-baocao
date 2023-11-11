@@ -1,0 +1,95 @@
+﻿@model WebsiteBanHang.Context.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = @Model.Id;
+            // lấy số lượng đặt hàng
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!")
+                    $('#CartCount').text(@Session["count"] + 1);
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('images/bg_1.jpg')">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-7">
+                <h2 class="mb-0">Chi tiết sản phẩm</h2>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="custom-breadcrumns border-bottom">
+    <div class="container">
+        <a href="index.html">Trang chủ</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">Chi tiết sản phẩm</span>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+
+            <div class="col-lg-6 mb-lg-0 mb-4">
+                <img src="~/Controllers/images/@Model.Avatar" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-lg-5 ml-auto align-self-center">
+                <h2 class="section-title-underline mb-5">
+                    <span>@Model.Name</span>
+                </h2>
+                <p>@Model.Price VND</p>
+                <p>@Model.FullDes</p>
+
+                <ol class="ul-check primary list-unstyled">
+                    <li>Tính năng đa dạng một chiều</li>
+                    <li>@Model.ShortDes</li>
+                    <li>Chiều cao: 300 cm</li>
+                    <li>Cân nặng: 64 kg</li>
+                    <li>3x4 hình ảnh</li>
+                    <li>2x3 hình ảnh</li>
+                </ol>
+                <div class="form-row  mt-4">
+                    <div class="form-group col-md flex-grow-0">
+                        <div class="input-group mb-3 input-spinner">
+                            <input type="text" id="ipQuantity" class="form-control" value="1">
+                        </div>
+                    </div> <!-- col.// -->
+                    <div class="form-group col-md">
+                        <a href="#" id="addtocart" class="btn  btn-primary">
+                            <i class="icon-shopping-cart"></i>
+                            <span class="text" h>Thêm vào giỏ hàng</span>
+                        </a>
+                    </div> <!-- col.// -->
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+

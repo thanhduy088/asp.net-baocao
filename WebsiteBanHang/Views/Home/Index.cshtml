@@ -1,0 +1,445 @@
+﻿@model WebsiteBanHang.Models.HomeModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="hero-slide owl-carousel site-blocks-cover">
+    @foreach (var item in Model.ListCategory)
+    {
+        <div class="intro-section" style="background-image: url('Controllers/images/@item.Avatar');">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
+                        <h1>@Html.ActionLink(item.Name, "ProductCategory", "Category", new { @Id = item.Id }, null)</h1>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div></div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-4 mb-5">
+                <h2 class="section-title-underline mb-5">
+                    <span>Danh mục sản phẩm</span>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.ListCategory)
+            {
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+
+                    <div class="feature-1 border">
+                        <div class="feature-1-content">
+                            <a href="@Url.Action("ProductCategory", "Category", new { Id = item.Id })">
+                                <img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid">
+                            </a>
+                                <h2>@item.Name</h2>
+                                <p>@item.Slug</p>
+                           </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-4 mb-5">
+                <h2 class="section-title-underline mb-5">
+                    <span>Thương hiệu</span>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.ListBrand)
+            {
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+
+                    <div class="feature-1 border">
+                        <div class="feature-1-content">
+                            <a href="@Url.Action("ProductBrand", "Brand", new { Id = item.Id })">
+                                <img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid">
+                            </a>
+                            <h2>@item.Name</h2>
+                            <p>@item.Slug</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="site-section">
+    <div class="container">
+
+
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-6 mb-5">
+                <h2 class="section-title-underline mb-3">
+                    <span>Tất cả sản phẩm</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-slide-3 owl-carousel">
+                    @foreach (var item in Model.ListProduct.Take(40))
+                    {
+                        <div class="course-1-item">
+                            <figure class="thumnail">
+                                <a href="@Url.Action("Detail", "Product", new { Id = item.Id })"><img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid"></a>
+                                <div class="price">@item.Price VND</div>
+                                <div class="category"><h3>@item.Name</h3></div>
+                            </figure>
+                            <div class="course-1-content pb-4">
+                                <div class="rating text-center mb-3">
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                </div>
+                                <p class="desc mb-4">@item.FullDes</p>
+                                <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Mua ngay</a></p>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="site-section">
+    <div class="container">
+
+
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-6 mb-5">
+                <h2 class="section-title-underline mb-3">
+                    <span>Điện thoại</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-slide-3 owl-carousel">
+                    @foreach (var item in Model.ListProduct.Where(n => n.CategoryId == 1).Take(4))
+                    {
+                        <div class="course-1-item">
+                            <figure class="thumnail">
+                                <a href="@Url.Action("Detail", "Product", new { Id = item.Id })"><img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid"></a>
+                                <div class="price">@item.Price VND</div>
+                                <div class="category"><h3>@item.Name</h3></div>
+                            </figure>
+                            <div class="course-1-content pb-4">
+                                <h2>Sản phẩm khuyến mãi</h2>
+                                <div class="rating text-center mb-3">
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                </div>
+                                <p class="desc mb-4">@item.FullDes</p>
+                                <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Mua ngay</a></p>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="site-section">
+    <div class="container">
+
+
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-6 mb-5">
+                <h2 class="section-title-underline mb-3">
+                    <span>Laptop</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-slide-3 owl-carousel">
+                    @foreach (var item in Model.ListProduct.Where(n => n.CategoryId == 2).Take(4))
+                    {
+                        <div class="course-1-item">
+                            <figure class="thumnail">
+                                <a href="@Url.Action("Detail", "Product", new { Id = item.Id })"><img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid"></a>
+                                <div class="price">@item.Price VND</div>
+                                <div class="category"><h3>@item.Name</h3></div>
+                            </figure>
+                            <div class="course-1-content pb-4">
+                                <h2>Sản phẩm khuyến mãi</h2>
+                                <div class="rating text-center mb-3">
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                </div>
+                                <p class="desc mb-4">@item.FullDes</p>
+                                <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Mua ngay</a></p>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="site-section">
+    <div class="container">
+
+
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-6 mb-5">
+                <h2 class="section-title-underline mb-3">
+                    <span>Phụ kiện</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-slide-3 owl-carousel">
+                    @foreach (var item in Model.ListProduct.Where(n => n.CategoryId == 3).Take(4))
+                    {
+                        <div class="course-1-item">
+                            <figure class="thumnail">
+                                <a href="@Url.Action("Detail", "Product", new { Id = item.Id })"><img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid"></a>
+                                <div class="price">@item.Price VND</div>
+                                <div class="category"><h3>@item.Name</h3></div>
+                            </figure>
+                            <div class="course-1-content pb-4">
+                                <h2>Sản phẩm khuyến mãi</h2>
+                                <div class="rating text-center mb-3">
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                </div>
+                                <p class="desc mb-4">@item.FullDes</p>
+                                <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Mua ngay</a></p>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="site-section">
+    <div class="container">
+
+
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-6 mb-5">
+                <h2 class="section-title-underline mb-3">
+                    <span>Đổng hồ</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-slide-3 owl-carousel">
+                    @foreach (var item in Model.ListProduct.Where(n => n.CategoryId == 4).Take(4))
+                    {
+                        <div class="course-1-item">
+                            <figure class="thumnail">
+                                <a href="@Url.Action("Detail", "Product", new { Id = item.Id })"><img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid"></a>
+                                <div class="price">@item.Price VND</div>
+                                <div class="category"><h3>@item.Name</h3></div>
+                            </figure>
+                            <div class="course-1-content pb-4">
+                                <h2>Sản phẩm khuyến mãi</h2>
+                                <div class="rating text-center mb-3">
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                </div>
+                                <p class="desc mb-4">@item.FullDes</p>
+                                <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Mua ngay</a></p>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="site-section">
+    <div class="container">
+
+
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-6 mb-5">
+                <h2 class="section-title-underline mb-3">
+                    <span>Máy nghe nhạc</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-slide-3 owl-carousel">
+                    @foreach (var item in Model.ListProduct.Where(n => n.CategoryId == 5).Take(4))
+                    {
+                        <div class="course-1-item">
+                            <figure class="thumnail">
+                                <a href="@Url.Action("Detail", "Product", new { Id = item.Id })"><img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid"></a>
+                                <div class="price">@item.Price VND</div>
+                                <div class="category"><h3>@item.Name</h3></div>
+                            </figure>
+                            <div class="course-1-content pb-4">
+                                <h2>Sản phẩm khuyến mãi</h2>
+                                <div class="rating text-center mb-3">
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                    <span class="icon-star2 text-warning"></span>
+                                </div>
+                                <p class="desc mb-4">@item.FullDes</p>
+                                <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Mua ngay</a></p>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<div class="section-bg style-1" style="background-image: url('Controllers/images/about_1.jpg');">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2 class="section-title-underline style-2">
+                    <span>Giới thiệu về trường đại học của chúng tôi</span>
+                </h2>
+            </div>
+            <div class="col-lg-8">
+                <p class="lead">Cảm ơn rất nhiều. Họ không biết sự thật, họ tìm cách bị từ chối, và họ chạy trốn với niềm vui; họ trốn chạy mọi lỗi lầm.</p>
+                <p>Bản thân công ty đã là một công ty rất thành công. Lúc nào cũng được đảm nhận bởi những thú vui, niềm vui nào sẽ xảy ra nếu không thì chúng rơi vào, hoặc những nghĩa vụ xa hơn, thường phù hợp với nhu cầu cần thiết của vấn đề do nỗi đau của kiến ​​​​trúc sư? Vì người khôn ngoan lấy lời nịnh nọt làm hài lòng kẻ đáng vui nhất, nên trốn tránh những người khen ngợi mình để chuốc lấy đau khổ và rắc rối? Đừng ai tránh khỏi những rắc rối như vậy. Lựa chọn từ chối những dịch vụ mình nợ, cái nào có phúc?</p>
+                <p><a href="#">Đọc thêm</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- // 05 - Block -->
+
+
+
+<div class="section-bg style-1" style="background-image: url('Controllers/images/hero_1.jpg');">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                <span class="icon flaticon-mortarboard"></span>
+                <h3>Triết lý của chúng tôi</h3>
+                <p>Nếu khách hàng rất thông minh, họ sẽ có thể đạt được kết quả mong muốn. Bằng cách từ chối từ chối, ai là người đúng đắn khi đẩy lùi những người được chọn? Đau đớn thay, nó sẽ bị chỉ trích.</p>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                <span class="icon flaticon-school-material"></span>
+                <h3>Nguyên tắc học thuật</h3>
+                <p>
+                    Nếu khách hàng rất thông minh, họ sẽ có thể đạt được kết quả mong muốn. Bằng cách từ chối từ chối, ai là người đúng đắn khi đẩy lùi những người được chọn?
+                    Đau đớn thay, nó sẽ bị chỉ trích.
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                <span class="icon flaticon-library"></span>
+                <h3>Chìa khóa thành công</h3>
+                <p>
+                    Nếu khách hàng rất thông minh, họ sẽ có thể đạt được kết quả mong muốn. Bằng cách từ chối từ chối, ai là người đúng đắn khi đẩy lùi những người được chọn?
+                    Đau đớn thay, nó sẽ bị chỉ trích.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="site-section ftco-subscribe-1" style="background-image: url('Controllers/images/bg_1.jpg')">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h2>Đăng ký với chúng tôi!</h2>
+                <p>Xa xa, đằng sau dãy núi chữ, xa đất nước Vokalia và Consonantia,</p>
+            </div>
+            <div class="col-lg-5">
+                <form action="" class="d-flex">
+                    <input type="text" class="rounded form-control mr-2 py-3" placeholder="Nhập email của bạn">
+                    <button class="btn btn-primary rounded py-3 px-4" type="submit">Gửi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

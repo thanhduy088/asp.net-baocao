@@ -1,0 +1,59 @@
+﻿@model List<WebsiteBanHang.Context.Product>
+@{
+    ViewBag.Title = "ProductCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('images/bg_1.jpg')">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-7">
+                <h2 class="mb-0">Sản phẩm theo loại</h2>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="custom-breadcrumns border-bottom">
+    <div class="container">
+        <a href="index.html">Trang chủ</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">Sản phẩm theo loại</span>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="course-1-item">
+                <figure class="thumnail">
+                    <a href="@Url.Action("Detail", "Product", new { Id = item.Id })"><img src="~/Controllers/images/@item.Avatar" alt="Image" class="img-fluid"></a>
+                    <div class="price">@item.Price VND</div>
+                    <div class="category"><h3>@item.Name</h3></div>
+                </figure>
+                <div class="course-1-content pb-4">
+                    
+                    <div class="rating text-center mb-3">
+                        <span class="icon-star2 text-warning"></span>
+                        <span class="icon-star2 text-warning"></span>
+                        <span class="icon-star2 text-warning"></span>
+                        <span class="icon-star2 text-warning"></span>
+                        <span class="icon-star2 text-warning"></span>
+                    </div>
+                    <p class="desc mb-4">@item.FullDes</p>
+                    <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Mua ngay</a></p>
+                </div>
+            </div>
+        </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
